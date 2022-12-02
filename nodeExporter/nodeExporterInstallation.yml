@@ -4,26 +4,3 @@
   become_user: root
   roles:
     - nodeexporter
-  tasks:
-    - name: download node exporter
-      get_url:
-        url: https://github.com/prometheus/node_exporter/releases/download/v{{ version.node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
-        dest: /opt
-    - name: unarchive node exporter
-      unarchive:
-        remote_src: yes
-        src: /opt/node_exporter-{{ version.node_exporter_version }}.linux-amd64.tar.gz
-        dest: /opt/node_exporter
-    - name: install unit file to systemd
-      template:
-        src: templates/node_exporter.service.j2
-        dest: /etc/systemd/system/node_exporter.service
-        owner: root
-        group: root
-        mode: 0600
-    - name: configure systemd to use service
-      systemd:
-        daemon_reload: yes
-        enabled: yes
-        state: started
-        name: node_exporter.service
