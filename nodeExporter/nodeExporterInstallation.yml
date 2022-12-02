@@ -1,6 +1,6 @@
 ---
-- hosts: nodexporter
+- hosts: localhost
   become: True
   become_user: root
   roles:
-    - nodeexporter
+    - nodeExporter

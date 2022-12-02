@@ -1,12 +1,12 @@
 ---
-- import_tasks: download node exporter
+- import_tasks: downloadNodeExporter.yml
   tags: downloadNodeExporter
 
-- import_tasks: unarchive node exporter
+- import_tasks: unarchiveNodeExporter.yml
   tags: unarchiveNodeExporter
 
-- import_tasks: create unit file to systemd
+- import_tasks: createUnitFileToSystemd.yml
   tags: createUnitFileToSystemd
 
-- import_tasks: configure systemd to use service
+- import_tasks: configureSystemdToUseService.yml
   tags: configureSystemdToUseService

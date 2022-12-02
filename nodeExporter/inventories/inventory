@@ -1,0 +1,16 @@
+[all:children]
+nodeExporter
+
+[security:children]
+localhost
+
+[env1]
+127.0.0.1
+
+[env2]
+#sec2
+
+[all:vars]
+#ansible_connection=ssh
+#ansible_ssh_user="{{ vault_ssh_user }}"
+#ansible_ssh_pass="{{ vault_ssh_password }}"
