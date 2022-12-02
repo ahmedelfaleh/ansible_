@@ -1,0 +1,6 @@
+---
+  - name: unarchive node exporter
+    unarchive:
+      remote_src: yes
+      src: /opt/node_exporter-{{ version.node_exporter_version }}.linux-amd64.tar.gz
+      dest: /opt/node_exporter
