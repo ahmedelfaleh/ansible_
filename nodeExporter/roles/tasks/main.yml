@@ -1,0 +1,12 @@
+---
+- import_tasks: download node exporter
+  tags: downloadNodeExporter
+
+- import_tasks: unarchive node exporter
+  tags: unarchiveNodeExporter
+
+- import_tasks: create unit file to systemd
+  tags: createUnitFileToSystemd
+
+- import_tasks: configure systemd to use service
+  tags: configureSystemdToUseService
