@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  tasks:
+# Redhat And Centos
+    - import_tasks: setup/rhel_family/rhel-family_srvrs.yml
+      when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' 
+
+# Debain And Ubuntu
+    - import_tasks: setup/debian_family/debian-family_srvrs.yml
+      when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+
+  # If you want to add another non-origin distribution, configure it in other-dists_srvrs.yml playbook file.
+  # and then add it here as shown below
+    - import_tasks: setup/other-dists_srvrs.yml
+      when: ansible_distribution == 'CloudLinux'
+

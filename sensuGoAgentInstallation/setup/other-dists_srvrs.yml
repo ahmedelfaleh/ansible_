@@ -1,0 +1,23 @@
+---
+  - name: "Updating Packages For Other Versions"
+    yum:
+      name: '*'
+      state: latest
+
+  - name: "Downloading Sensu Go Agent Repository For Other Versions"
+    get_url: 
+      url: https://packagecloud.io/install/repositories/sensu/stable/script.rpm.sh
+      dest: /root/
+
+  - name: "Adding Sensu Go Agent Repositroy For Other Versions"
+    #    vars:
+    #      os: centos
+    #      dist: '7'
+    shell: os=centos dist=7 bash /root/script.rpm.sh
+
+  - name: "Installing Sensu Go Agent Package On CloudLinux"
+    yum:
+      name: sensu-go-agent
+      state: latest
+
+  - import_tasks: setup/configure_sensu_user_home_directory.yml 

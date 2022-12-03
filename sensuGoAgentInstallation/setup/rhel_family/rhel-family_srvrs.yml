@@ -1,0 +1,21 @@
+---
+  - name: "Updating Packages"
+    yum:
+      name: '*'
+      state: latest
+
+  - name: "Downloading Sensu Go Agent Repository"
+    get_url:
+      url: https://packagecloud.io/install/repositories/sensu/stable/script.rpm.sh
+      dest: /root/
+
+  - name: "Adding Sensu Go Agent Repositroy"
+    shell: /bin/bash /root/script.rpm.sh
+  
+  - name: "Installing Sensu Go Agent Package"
+    yum:
+      name: sensu-go-agent
+      state: latest
+
+  - import_tasks: setup/configure_sensu_user_home_directory.yml
+

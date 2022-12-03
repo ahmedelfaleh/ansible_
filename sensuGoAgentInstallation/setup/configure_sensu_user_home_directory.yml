@@ -1,0 +1,60 @@
+---
+  - name: "Creating Senus Home Directory"
+    file:
+      path: /opt/sensu
+      state: directory
+      mode: '0755'
+
+  - name: "Changing Sesnu User shell and Home Directory"
+    user:
+      name: sensu
+      shell: /bin/bash
+      groups: sensu
+      home: /opt/sensu
+
+  - name: "Copying bash* Files - Redhat & CentOS"
+    shell: cp /root/{{ item }} /opt/sensu/
+    with_items:
+      - .bash*
+#      - .bash_profile
+#      - .bash_history
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'CloudLinux'
+
+  - name: "Copying bash* Files - Debian & Ubuntu"
+    shell: cp /root/{{ item }} /opt/sensu/
+    with_items:
+      - .bash*     
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+  - name: "Changing Sensu Home Directory Ownership"
+    file:
+      path: /opt/sensu
+      state: directory
+      recurse: yes
+      owner: sensu
+      group: sensu
+
+#  - name: "Add User To SUDO Without Password"
+#    lineinfile:
+#      path: /etc/sudoers
+#      regexp: '^%wheel'
+#      insertbefore: '^# %wheel'
+#      line: '%sensu ALL=(ALL) NOPASSWD: ALL'
+#      validate: 'visudo -cf %s'
+#    when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'CloudLinux'
+#
+#  - name: "Add User To SUDO Without Password"
+#    lineinfile:
+#      path: /etc/sudoers
+#      regexp: '^%admin'
+#      insertbefore: '^%admin'
+#      line: '%sensu ALL=(ALL:ALL) NOPASSWD: ALL'
+#      validate: 'visudo -cf %s'
+#    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+
+  - import_tasks: setup/rhel_family/rhel_prep_for_ruby.yml
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'CloudLinux'
+
+  - import_tasks: setup/debian_family/debian_prep_for_ruby.yml
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

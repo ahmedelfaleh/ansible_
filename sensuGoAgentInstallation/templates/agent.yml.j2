@@ -1,0 +1,9 @@
+---
+namespace: "{{ item.SENSU_NAMESPACE }}"
+subscriptions:
+  - {{ item.SENSU_SUBSCRIPTION }}
+
+backend-url:
+  - "wss://{{ item.SENSU_BACKEND }}:{{ item.SENSU_PORT }}"
+  
+log-level: "debug" # available log levels: panic, fatal, error, warn, info, debug

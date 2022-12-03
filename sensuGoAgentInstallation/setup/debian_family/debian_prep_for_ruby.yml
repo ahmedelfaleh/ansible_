@@ -1,0 +1,40 @@
+---
+  - name: "Preparing For Installing rbenv Package For Debian Or Ubuntu Servers"
+    apt:
+      name: '{{ packages }}'
+    vars:
+      packages:
+        - git-core
+        - autoconf
+        - bison
+        - build-essential
+        - libssl-dev
+        - libyaml-dev
+        - libreadline6-dev
+        - zlib1g-dev
+        - libncurses5-dev
+        - libffi-dev
+        - libgdbm-dev
+      state: installed
+
+  - name: "Installing libgdbm For Debain 8/9 and Ubuntu 16.04"
+    apt:
+      name: libgdbm3
+      state: installed
+    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04' or ansible_distribution == 'Debian' and ansible_distribution_version == '9' or ansible_distribution_version == '8'
+
+  - name: "Installing libgdbm For Ubuntu 18.04"
+    apt:
+      name: libgdbm5
+      state: installed
+    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '18.04'
+
+  - name: "Installing libgdbm For Debian 10 and Ubuntu 20.04"
+    apt:
+      name: libgdbm6
+      state: latest
+    when: ansible_distribution == 'Debian' and ansible_distribution_version == '10' or ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04'
+
+
+  - import_tasks: setup/install_ruby_2.5.8.yml
+

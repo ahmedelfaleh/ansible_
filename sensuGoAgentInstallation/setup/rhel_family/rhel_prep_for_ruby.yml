@@ -1,0 +1,31 @@
+---
+  - name: "Enabling PowerTools config-manager For RHEL 8 Family"
+    shell: yum config-manager --set-enabled PowerTools
+    when: ansible_distribution == "CentOS" and ansible_distribution_major_version == '8' or ansible_distribution == "RedHat" and ansible_distribution_major_version == '8' or ansible_distribution == "CloudLinux" and ansible_distribution_major_version == '8'
+
+  - name: "Preparing For Installing rbenv Package"
+    yum:
+      name: '{{ packages }}'
+    vars:
+      packages:
+          - git-core 
+          - zlib 
+          - zlib-devel 
+          - gcc-c++ 
+          - patch 
+          - readline 
+          - readline-devel 
+          - libyaml-devel 
+          - libffi-devel 
+          - openssl-devel 
+          - make 
+          - bzip2 
+          - autoconf 
+          - automake 
+          - libtool 
+          - bison
+          - curl 
+          - sqlite-devel
+      state: installed
+
+  - import_tasks: setup/install_ruby_2.5.8.yml
