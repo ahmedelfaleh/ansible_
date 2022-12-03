@@ -1,11 +1,11 @@
 [all:children]
 nodeExporter
 
-[security:children]
+[nodeExporter:children]
 localhost
 
 [env1]
-127.0.0.1
+localhost
 
 [env2]
 #sec2
