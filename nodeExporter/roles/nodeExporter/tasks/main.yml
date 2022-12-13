@@ -10,3 +10,6 @@
 
 - import_tasks: configureSystemdToUseService.yml
   tags: configureSystemdToUseService
+
+- import_tasks: findPrometheusYAMLFile.yml
+  tags: findPrometheusYAMLFile

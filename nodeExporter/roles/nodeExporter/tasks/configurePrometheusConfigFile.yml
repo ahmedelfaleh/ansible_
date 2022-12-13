@@ -1,0 +1,4 @@
+---
+- name: configure Prometheus YAML file
+  blockinfile:
+    - 

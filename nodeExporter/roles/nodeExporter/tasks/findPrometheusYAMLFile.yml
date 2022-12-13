@@ -1,0 +1,6 @@
+---
+- name: find prometheus YAML file
+  find:
+    paths: /
+    file_type: file
+    patterns: prometheus.yml
