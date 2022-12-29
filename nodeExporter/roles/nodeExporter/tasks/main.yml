@@ -1,15 +1,15 @@
 ---
-- import_tasks: downloadNodeExporter.yml
-  tags: downloadNodeExporter
+  - import_tasks: downloadNodeExporter.yml
+    tags: downloadNodeExporter
 
-- import_tasks: unarchiveNodeExporter.yml
-  tags: unarchiveNodeExporter
+  - import_tasks: unarchiveNodeExporter.yml
+    tags: unarchiveNodeExporter
 
-- import_tasks: createUnitFileToSystemd.yml
-  tags: createUnitFileToSystemd
+  - import_tasks: createUnitFileToSystemd.yml
+    tags: createUnitFileToSystemd
 
-- import_tasks: configureSystemdToUseService.yml
-  tags: configureSystemdToUseService
+  - import_tasks: configureSystemdToUseService.yml
+    tags: configureSystemdToUseService
 
-- import_tasks: findPrometheusYAMLFile.yml
-  tags: findPrometheusYAMLFile
+  - import_tasks: findPrometheusYAMLFile.yml
+    tags: findPrometheusYAMLFile

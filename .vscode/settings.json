@@ -1,8 +1,21 @@
 {
     "yaml.schemas": {
         "https://raw.githubusercontent.com/ansible/schemas/main/f/ansible.json#/$defs/playbook": [
-            "file:///home/ahmedelfaleh/ansible_/nodeExporter/roles/nodeExporter/tasks/findPrometheusYAMLFile.yml",
-            "file:///home/ahmedelfaleh/ansible_/nodeExporter/roles/nodeExporter/tasks/main.yml"
-        ]
+            "file:///home/ahmedelfaleh/ansible_/nodeExporter/roles/nodeExporter/tasks/findPrometheusYAMLFile.yml"
+        ],
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": [
+            "file:///home/ahmedelfaleh/ansible_/opensearch/opensearch.yml",
+            "file:///home/ahmedelfaleh/ansible_/opensearch/roles/linux/opensearchUpgrading/debug.yml",
+            "file:///home/ahmedelfaleh/ansible_/opensearch/roles/linux/opensearchUpgrading/ping.yml",
+            "file:///home/ahmedelfaleh/ansible_/opensearch/roles/opensearchUpgrading/tasks/ping.yml",
+            "file:///home/ahmedelfaleh/ansible_/opensearch/roles/opensearchUpgrading/tasks/disableShardAllocation.yml"
+        ],
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/inventory.json": [
+            "file:///home/ahmedelfaleh/ansible_/opensearch/inventories/group1.yml",
+            "file:///home/ahmedelfaleh/ansible_/opensearch/inventories/group2.yml",
+            "file:///home/ahmedelfaleh/ansible_/opensearch/inventories/group3.yml"
+        ],
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks": "file:///home/ahmedelfaleh/ansible_/opensearch/roles/opensearchUpgrading/tasks/main.yml",
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json": "file:///home/ahmedelfaleh/ansible_/nodeExporter/roles/nodeExporter/tasks/main.yml"
     }
 }
