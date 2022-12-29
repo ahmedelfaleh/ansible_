@@ -1,0 +1,18 @@
+---
+  - name: disable shard allocation
+    ansible.builtin.uri:
+      url: https://localhost:9200/_cluster/settings
+      url_username: admin
+      url_password: "791346Ah!"
+      validate_certs: no
+      method: PUT
+      return_content: yes
+      body_format: json
+      body: '{ "persistent": { "cluster.routing.allocation.enable": "primaries" } }'
+    register: acknowledge
+
+  - name: debug disabling shard allocation
+    ansible.builtin.debug:
+      var: acknowledge.json.persistent.cluster.routing.allocation.enable
+
+

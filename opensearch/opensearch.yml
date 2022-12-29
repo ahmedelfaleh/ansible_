@@ -1,0 +1,7 @@
+---
+
+- name: opensearch version upgrading
+  hosts: group1
+  gather_facts: false
+  roles:
+    - opensearchUpgrading

@@ -1,0 +1,15 @@
+---
+  - name: download tarball file
+    become: true
+    ansible.builtin.get_url:
+      url: https://artifacts.opensearch.org/releases/bundle/opensearch/{{ NEW_OS_VERSION }}/opensearch-{{ NEW_OS_VERSION }}-linux-x64.tar.gz
+      dest: /opt/opensearch-{{ NEW_OS_VERSION }}-linux-x64.tar.gz
+      force: false
+    register: FILENAME
+
+  - name: debug file name
+    ansible.builtin.debug:
+      var: FILENAME.dest
+
+  - ansible.builtin.set_fact:
+      TARBALL_FILE_LOCATION: "{{ FILENAME.dest }}"
