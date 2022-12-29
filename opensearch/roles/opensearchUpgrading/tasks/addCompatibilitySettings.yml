@@ -1,0 +1,7 @@
+---
+  - name: add compatibility settings
+    ansible.builtin.blockinfile:
+      path: "{{ OPENSEARCH_PATH_CONF }}/opensearch.yml"
+      block: "compatibility.override_main_response_version: true"
+      marker: "# {mark} ANSIBLE MANAGED BLOCK"
+      insertafter: "Various"

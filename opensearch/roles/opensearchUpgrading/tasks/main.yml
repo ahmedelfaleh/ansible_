@@ -14,14 +14,14 @@
   - import_tasks: portOldToNewConfig.yml
     tags: portOldToNewConfig
 
-#  - import_tasks: addCompatibilitySettings
-#    tags: addCompatibilitySettings
+  - import_tasks: addCompatibilitySettings.yml
+    tags: addCompatibilitySettings
 
-#  - import_tasks: copyCertificates
-#    tags: copyCertificates
+  - import_tasks: copyCertificates.yml
+    tags: copyCertificates
 
-#  - import_taks: copyOtherFiles
-#    tags: copyOtherFiles
+  - import_tasks: copyOtherFiles.yml
+    tags: copyOtherFiles
 
 #  - import_taks: setDataLogsPaths
 #    tags: setDataLogsPaths

@@ -1,3 +1,9 @@
 ---
   - name: port old os config to the new one
-    
+    ansible.builtin.copy:
+      remote_src: true
+      src: "{{ OLD_OS_PATH_CONFIG }}/opensearch.yml"
+      dest: "{{ OPENSEARCH_PATH_CONF }}/opensearch.yml"
+      backup: true
+      force: false
+  

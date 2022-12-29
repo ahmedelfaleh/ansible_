@@ -1,0 +1,10 @@
+---
+  - name: copy certificates "crt files"
+    ansible.builtin.copy:
+      remote_src: true
+      src:
+        - "{{ OLD_OS_PATH_CONFIG }}/{{ CERT_NAME }}.crt"
+        - "{{ OLD_OS_PATH_CONFIG }}/{{ CERT_NAME }}.key"
+      dest: "{{ OPENSEARCH_PATH_CONF }}"
+      force: false
+    when: CERT_NAME is defined
