@@ -55,7 +55,7 @@ If the opensearch service is up and running by tarball installation, you have to
   
   **Note**: Do not overwrite the current Opensearch config, data, and logs directories.
   
-  `tar zxvf opensearch-dashboards-1.3.6-linux-x64.tar.gz`
+  `tar zxvf opensearch-1.3.6-linux-x64.tar.gz`
 
 - Set the OPENSEARCH_PATH_CONF environment variable to the directory that contains opensearch.yml (e.g. /etc/opensearch).
   
@@ -64,7 +64,7 @@ If the opensearch service is up and running by tarball installation, you have to
 
 - (Optional) If you’re actively connecting to the cluster with legacy clients that check for a particular version number, such as Logstash OSS, add a compatibility setting to opensearch.yml:
 
-  compatibility.override_main_response_version: true
+  `compatibility.override_main_response_version: true`
 
 - (Optional) Add your certificates to your config directory, add them to opensearch.yml, and initialize the security plugin.
   `# cp /old/path/config/{CERT_NAME}.crt /new/path/config/`

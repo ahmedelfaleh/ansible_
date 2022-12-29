@@ -14,5 +14,3 @@
   - name: debug disabling shard allocation
     ansible.builtin.debug:
       var: acknowledge.json.persistent.cluster.routing.allocation.enable
-
-

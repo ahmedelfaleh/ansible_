@@ -11,11 +11,8 @@
   - ansible.builtin.import_tasks: extractTarballFile.yml
     tags: extractTarballFile      
 
-#  - import_tasks: exportOpensearchEnvVar.yml
-#    tags: setOpensearchEnvVar
-
-#  - import_tasks: portOldToNewConfig
-#    tags: portOldToNewConfig
+  - import_tasks: portOldToNewConfig.yml
+    tags: portOldToNewConfig
 
 #  - import_tasks: addCompatibilitySettings
 #    tags: addCompatibilitySettings
