@@ -9,15 +9,20 @@
       recurse: false
     register: DIRNAME
 
-  - name: dir state
-    become: true
-    ansible.builtin.stat:
-      path: "{{ DIRNAME['files'][0]['path'] }}/"
-    register: existance
-
-  - name: check if os dir exists
+  - name: debug dir
     ansible.builtin.debug:
-      var: existance.stat.exists
+      var: DIRNAME['files'][0]['path']
+
+        #  - name: dir state
+        #    become: true
+        #    ansible.builtin.stat:
+        #      path: "{{ DIRNAME['files'][0]['path'] }}/"
+        #    register: existance
+        #    when: DIRNAME['files'][0]['path'] is defined
+        #
+        #  - name: check if os dir exists
+        #    ansible.builtin.debug:
+        #      var: existance.stat.exists
 
   - name: extract tarball file
     become: true
@@ -25,7 +30,22 @@
       remote_src: true
       src: "{{ TARBALL_FILE_LOCATION }}"
       dest: /opt
-    when: not existance.stat.exists
+    register: DIRNAME
+    when: DIRNAME['files'][0]['path'] is not defined
+  
+  - name: find the new extracted directory
+    ansible.builtin.find:
+      paths: /opt
+      file_type: directory
+      patterns:
+        - "*{{ NEW_OS_VERSION }}*"
+      depth: 1
+      recurse: false
+    register: DIRNAME
+
+  - name: debug dir
+    ansible.builtin.debug:
+      var: DIRNAME['files'][0]['path']
 
   - ansible.builtin.set_fact:
       OPENSEARCH_PATH_CONF: "{{ DIRNAME['files'][0]['path'] }}/config"

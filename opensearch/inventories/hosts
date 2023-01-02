@@ -1,5 +1,5 @@
 [masters1]
-master1 ansible_host=10.10.10.3   ansible_user=ahmedelfaleh
+master1 ansible_host=10.10.10.3 ansible_user=ahmedelfaleh
 
 [group1:children]
 masters1
