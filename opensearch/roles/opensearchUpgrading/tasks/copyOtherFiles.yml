@@ -2,8 +2,7 @@
 #  - name: copy other files
 #    ansible.builtin.copy:
 #      remote_src: true
-#      src: 
-#        - "{{ OLD_OS_PATH_CONFIG }}/kirck."
+#      src: "{{ OLD_OS_PATH_CONFIG }}/*.pem"
 #      dest: "{{ OPENSEARCH_PATH_CONF }}"
 #      backup: true
 #    register: copying
@@ -20,5 +19,14 @@
 
   - name: debug copying other files
     ansible.builtin.debug:
-      var: copying['files']['all']['path']
+      var: copying.files
+
+  - name: set_fact
+    ansible.builtin.set_fact:
+      pemvar: copying.files
+
+  - name: debug pem paths
+    ansible.builtin.debug:
+      var: "{{ pemvar | map(attribute='path') | join(',') }}"
+
 
