@@ -2,10 +2,9 @@
   - name: copy other files
     ansible.builtin.copy:
       remote_src: true
-      src:
-        - "{{ OLD_OS_PATH_CONFIG }}/jvm.options*"
-        - "{{ OLD_OS_PATH_CONFIG }}/opensearch.keystore"
-        - "{{ OLD_OS_PATH_CONFIG }}/*.pem"
+      src: "{{ OLD_OS_PATH_CONFIG }}/jvm.options*"
+          #        - "{{ OLD_OS_PATH_CONFIG }}/opensearch.keystore"
+          #        - "{{ OLD_OS_PATH_CONFIG }}/*.pem"
       dest: "{{ OPENSEARCH_PATH_CONF }}"
       mode: preserve
     register: copying
