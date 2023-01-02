@@ -1,14 +1,24 @@
 ---
-  - name: copy other files
-    ansible.builtin.copy:
-      remote_src: true
-      src: "{{ OLD_OS_PATH_CONFIG }}/jvm.options*"
-          #        - "{{ OLD_OS_PATH_CONFIG }}/opensearch.keystore"
-          #        - "{{ OLD_OS_PATH_CONFIG }}/*.pem"
-      dest: "{{ OPENSEARCH_PATH_CONF }}"
-      mode: preserve
+#  - name: copy other files
+#    ansible.builtin.copy:
+#      remote_src: true
+#      src: 
+#        - "{{ OLD_OS_PATH_CONFIG }}/kirck."
+#      dest: "{{ OPENSEARCH_PATH_CONF }}"
+#      backup: true
+#    register: copying
+
+  - name: find other files
+    ansible.builtin.find:
+      paths: "{{ OLD_OS_PATH_CONFIG }}"
+      file_type: file
+      patterns:
+        - "*.pem"
+      recurse: false
     register: copying
+
 
   - name: debug copying other files
     ansible.builtin.debug:
-      var: copying
+      var: copying['files']['all']['path']
+
