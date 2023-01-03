@@ -1,32 +1,21 @@
 ---
-#  - name: copy other files
-#    ansible.builtin.copy:
-#      remote_src: true
-#      src: "{{ OLD_OS_PATH_CONFIG }}/*.pem"
-#      dest: "{{ OPENSEARCH_PATH_CONF }}"
-#      backup: true
-#    register: copying
-
-  - name: find other files
+  - name: find pem files
     ansible.builtin.find:
       paths: "{{ OLD_OS_PATH_CONFIG }}"
       file_type: file
-      patterns:
-        - "*.pem"
+      patterns: "*.pem"
       recurse: false
-    register: copying
+    register: pem_files
 
-
-  - name: debug copying other files
-    ansible.builtin.debug:
-      var: copying.files
-
-  - name: set_fact
+  - name: set pem files list variable
     ansible.builtin.set_fact:
-      pemvar: copying.files
+      pem_files_list: "{{ pem_files.files }}"
 
-  - name: debug pem paths
-    ansible.builtin.debug:
-      var: "{{ pemvar | map(attribute='path') | join(',') }}"
+  - name: copy pem files
+    ansible.builtin.copy:
+      remote_src: true
+      src: "{{ item }}"
+      dest: "{{ OPENSEARCH_PATH_CONF }}"
+    loop: "{{ pem_files.files | map(attribute='path') | list }}"
 
 
