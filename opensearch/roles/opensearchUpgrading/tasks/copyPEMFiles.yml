@@ -1,22 +1,28 @@
 ---
   - name: find pem files
     ansible.builtin.find:
-      paths: "{{ OLD_OS_PATH_CONFIG }}"
+      paths: "{{ PEM_PATH }}"
       file_type: file
       patterns: "*.pem"
       recurse: false
-    register: pem_files
-    when: MV_PEM_FILES == yes
+    register: PEM_FILES
+    when: PEM_PATH is defined
 
   - name: set pem files list variable
     ansible.builtin.set_fact:
-      PEM_FILES_LIST: "{{ pem_files.files }}"
+      PEM_FILES_LIST: "{{ PEM_FILES.files }}"
+    when: PEM_FILES is defined
 
   - name: copy pem files
     ansible.builtin.copy:
       remote_src: true
       src: "{{ item }}"
-      dest: "{{ OPENSEARCH_PATH_CONF }}"
-    loop: "{{ pem_files.files | map(attribute='path') | list }}"
+      dest: "{{ NEW_PEM_PATH }}"
+    loop: "{{ PEM_FILES.files | map(attribute='path') | list }}"
+    when: NEW_PEM_PATH is defined
 
+  - name: debug copying pem files
+    ansible.builtin.debug:
+      msg: "Variable NEW_PEM_PATH is not defined, task skipped"
+    when: NEW_PEM_PATH is undefined
 

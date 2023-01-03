@@ -1,25 +1,30 @@
 ---
-#  - name: find cert files
-#    ansible.builtin.find:
-#      paths: "{{ OLD_OS_PATH_CONFIG }}"
-#      file_type: file
-#      patterns: 
-#        - "{{ CERT_NAME }}.*"
-#      recurse: false
-#    register: cert_files
-#    when: CERT_NAME is defined
+  - name: find cert files
+    ansible.builtin.find:
+      paths: "{{ CERT_PATH }}"
+      file_type: file
+      patterns: 
+        - "{{ CERT_NAME }}.*"
+      recurse: false
+    register: CERT_FILES
+    when: CERT_PATH is defined and CERT_NAME is defined
 
-#  - name: set cert files list variable
-#    ansible.builtin.set_fact:
-#      cert_files_list: "{{ cert_files.files }}"
-#    when: CERT_NAME is defined 
+  - name: set cert files list variable
+    ansible.builtin.set_fact:
+      CERT_FILES_LIST: "{{ CERT_FILES.files }}"
+    when: CERT_PATH is defined and CERT_NAME is defined 
 
   - name: copy cert files
     ansible.builtin.copy:
       remote_src: true
       src: "{{ item }}"
-      dest: "{{ OPENSEARCH_PATH_CONF }}"
-    loop: "{{ cert_files.files | map(attribute='path') | list }}"
-    when: cert_files_list is defined
+      dest: "{{ NEW_CERT_PATH }}"
+    loop: "{{ CERT_FILES.files | map(attribute='path') | list }}" # Loop on defined list as ansible output
+    when: NEW_CERT_PATH is defined
+
+  - name: debug copying certificates
+    ansible.builtin.debug:
+      msg: "Variable NEW_CERT_PATH is not defined, task skipped"
+    when: NEW_CERT_PATH is undefined
 
 
