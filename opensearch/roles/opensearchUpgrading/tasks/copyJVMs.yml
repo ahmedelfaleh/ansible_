@@ -1,0 +1,16 @@
+---
+  - name: copy JVM file
+    ansible.builtin.copy:
+      remote_src: true
+      src: "{{ OLD_OS_PATH_CONFIG }}/jvm.options"
+      dest: "{{ OPENSEARCH_PATH_CONF }}"
+      force: true
+  
+  - name: copy JVM options.d directory
+    ansible.builtin.copy:
+      remote_src: true
+      src: "{{ OLD_OS_PATH_CONFIG }}/jvm.options.d"
+      dest: "{{ OPENSEARCH_PATH_CONF }}"
+      directory_mode: recurse
+      mode: preserve
+      force: true

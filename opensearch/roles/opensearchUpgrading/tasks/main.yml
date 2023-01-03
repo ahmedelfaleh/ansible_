@@ -11,17 +11,20 @@
   - ansible.builtin.import_tasks: extractTarballFile.yml
     tags: extractTarballFile      
 
-  - import_tasks: portOldToNewConfig.yml
+  - ansible.builtin.import_tasks: portOldToNewConfig.yml
     tags: portOldToNewConfig
 
-  - import_tasks: addCompatibilitySettings.yml
+  - ansible.builtin.import_tasks: addCompatibilitySettings.yml
     tags: addCompatibilitySettings
 
-  - import_tasks: copyCertificates.yml
+  - ansible.builtin.import_tasks: copyCertificates.yml
     tags: copyCertificates
 
-  - import_tasks: copyPEMFiles.yml
+  - ansible.builtin.import_tasks: copyPEMFiles.yml
     tags: copyOtherFiles
+
+  - ansible.builtin.import_tasks: copyJVMs.yml
+    tags: copyJVMs
 
 #  - import_taks: setDataLogsPaths
 #    tags: setDataLogsPaths
