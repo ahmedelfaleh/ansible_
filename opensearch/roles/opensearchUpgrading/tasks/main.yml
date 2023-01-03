@@ -14,9 +14,6 @@
   - ansible.builtin.import_tasks: portOldToNewConfig.yml
     tags: portOldToNewConfig
 
-  - ansible.builtin.import_tasks: addCompatibilitySettings.yml
-    tags: addCompatibilitySettings
-
   - ansible.builtin.import_tasks: copyCertificates.yml
     tags: copyCertificates
 
@@ -26,8 +23,11 @@
   - ansible.builtin.import_tasks: copyJVMs.yml
     tags: copyJVMs
 
-#  - import_taks: setDataLogsPaths
-#    tags: setDataLogsPaths
+  - ansible.builtin.import_tasks: addCompatibilitySettings.yml
+    tags: addCompatibilitySettings
+
+  - ansible.builtin.import_tasks: setDataLogsPaths.yml
+    tags: setDataLogsPaths
 
 #  - import_tasks: changeSystemdFile
 #    tags: changeSystemdFile

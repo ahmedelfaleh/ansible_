@@ -1,0 +1,14 @@
+---
+  - name: change data path
+    ansible.builtin.replace:
+      path: "{{ OPENSEARCH_PATH_CONF }}/opensearch.yml"
+      regexp: '^(.*)path.data(.*)$'
+      replace: path.data="{{ DATA_PATH }}"
+      backup: true
+
+  - name: change log path
+    ansible.builtin.replace:
+      path: "{{ OPENSEARCH_PATH_CONF }}/opensearch.yml"
+      regexp: '^(.*)path.log(.*)$'
+      replace: path.log="{{ LOG_PATH }}"
+      backup: true
