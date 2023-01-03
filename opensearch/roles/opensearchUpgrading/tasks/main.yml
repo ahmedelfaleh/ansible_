@@ -20,7 +20,7 @@
   - import_tasks: copyCertificates.yml
     tags: copyCertificates
 
-  - import_tasks: copyOtherFiles.yml
+  - import_tasks: copyPEMFiles.yml
     tags: copyOtherFiles
 
 #  - import_taks: setDataLogsPaths
