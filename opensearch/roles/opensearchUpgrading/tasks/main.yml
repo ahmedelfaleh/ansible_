@@ -29,7 +29,10 @@
   - ansible.builtin.import_tasks: setDataLogsPaths.yml
     tags: setDataLogsPaths
 
-#  - import_tasks: changeSystemdFile
+  - ansible.builtin.import_tasks: copyPluginsFiles.yml
+    tags: copyPluginsFiles
+
+#  - ansible.builtin.import_tasks: changeSystemdFile.yml
 #    tags: changeSystemdFile
 
 #  - import_tasks: systemcReload

@@ -1,0 +1,7 @@
+---
+  - name: copy plugins files
+    ansible.builtin.copy:
+      remote_src: true
+      src: "{{ OLD_OS_PATH_PLUGINS }}/{{ item }}"
+      dest: "{{ DIRNAME['files'][0]['path'] }}/plugins"
+    loop: "{{ PLUGINS_NAMES | list}}"

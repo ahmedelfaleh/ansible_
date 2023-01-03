@@ -2,5 +2,5 @@
   - name: stop opensearch service
     become: true
     ansible.builtin.service:
-      name: opensearch.service
+      name: "{{ SYSTEMD_SERVICE_NAME }}.service"
       state: stopped

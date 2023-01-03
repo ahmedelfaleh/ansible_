@@ -31,7 +31,7 @@
       src: "{{ TARBALL_FILE_LOCATION }}"
       dest: /opt
     register: DIRNAME
-    when: DIRNAME['files'][0]['path'] is not defined
+    when: DIRNAME['files'][0]['path'] is undefined
   
   - name: find the new extracted directory
     ansible.builtin.find:
