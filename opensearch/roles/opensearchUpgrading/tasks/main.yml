@@ -32,17 +32,17 @@
   - ansible.builtin.import_tasks: copyPluginsFiles.yml
     tags: copyPluginsFiles
 
-#  - ansible.builtin.import_tasks: changeSystemdFile.yml
-#    tags: changeSystemdFile
+  - ansible.builtin.import_tasks: changeSystemdFile.yml
+    tags: changeSystemdFile
 
-#  - import_tasks: systemcReload
+#  -ansible.builtin.import_tasks: systemcReload
 #    tags: systemcReload
   
-#  - import_tasks: restartService
+#  -ansible.builtin.import_tasks: restartService
 #    tags: restartService
 
-#  - import_tasks: waitForNodeToJoin
+#  -ansible.builtin.import_tasks: waitForNodeToJoin
 #    tags: waitForNodeToJoin
 
-#  - import_tasks: enableShardAllocation
+#  -ansible.builtin.import_tasks: enableShardAllocation
 #    tags: enableShardAllocation
