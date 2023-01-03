@@ -6,10 +6,11 @@
       patterns: "*.pem"
       recurse: false
     register: pem_files
+    when: MV_PEM_FILES == yes
 
   - name: set pem files list variable
     ansible.builtin.set_fact:
-      pem_files_list: "{{ pem_files.files }}"
+      PEM_FILES_LIST: "{{ pem_files.files }}"
 
   - name: copy pem files
     ansible.builtin.copy:
