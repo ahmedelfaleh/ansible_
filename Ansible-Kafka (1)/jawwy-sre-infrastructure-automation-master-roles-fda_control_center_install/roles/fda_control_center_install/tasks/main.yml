@@ -1,0 +1,44 @@
+---
+- name: Configure Confluent Control Center (1/3)
+  lineinfile:
+    path: "{{ kakfa_properties_confluentConfigFile }}"
+    state: present
+    regexp: '^#*bootstrap.servers=.*'
+    line: "bootstrap.servers={{ control_center_bootstrap_servers }}"
+
+- name: Configure Confluent Control Center (2/3)
+  lineinfile:
+    path: "{{ kakfa_properties_confluentConfigFile }}"
+    state: present
+    regexp: '^#*confluent.controlcenter.data.dir=.*'
+    line: "confluent.controlcenter.data.dir=/opt/SP/confluent/control-center"
+
+- name: Configure Confluent Control Center (3/3)
+  lineinfile:
+    path: "{{ kakfa_properties_confluentConfigFile }}"
+    state: present
+    regexp: '^#*zookeeper.connect=.*'
+    line: "zookeeper.connect={{ control_center_zookeeper_connect }}"
+
+- name: Create Confluent Directories (1/2)
+  file:
+    path: "{{ kafka_properties_ControlCenter_RootDir }}"
+    state: directory
+    mode: '0775'
+    owner: root
+    group: confluent
+
+- name: Create Confluent Directories (2/2)
+  file:
+    path: "{{ kafka_properties_ControlCenter_WorkingDir }}"
+    state: directory
+    mode: '0775'
+    owner: root
+    group: confluent
+
+- name: Configure Kafka Connections to Control Center
+  blockinfile:
+    path: "{{ kafka_properties_connectConfigFile }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: "{{ kafka_properties_connectConfig }}"
+...

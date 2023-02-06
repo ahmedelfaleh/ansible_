@@ -1,0 +1,58 @@
+---
+- name: Create Kafka working directory
+  file:
+    path: "{{ kafka_properties_logdir }}"
+    state: directory
+    mode: '0775'
+    owner: root
+    group: confluent
+
+- name: Configure Kafka (1/7)
+  lineinfile:
+    path: "{{ kafka_properties_ConfigFile }}"
+    state: present
+    regexp: '^#*zookeeper.connect=.*'
+    line: "zookeeper.connect={{ kafka_properties_zookeeperPrincipal  }}:2181"
+
+- name: Configure Kafka (2/7)
+  lineinfile:
+    path: "{{ kafka_properties_ConfigFile }}"
+    state: present
+    regexp: '^#*broker\.id=.*'
+    line: "#broker.id="
+
+- name: Configure Kafka (3/7)
+  lineinfile:
+    path: "{{ kafka_properties_ConfigFile }}"
+    state: present
+    regexp: '^#*broker.id.generation.enable=.*'
+    line: "broker.id.generation.enable=true"
+
+- name: Configure Kafka (4/7)
+  lineinfile:
+    path: "{{ kafka_properties_ConfigFile }}"
+    state: present
+    regexp: '^#*log.dirs=.*'
+    line: "log.dirs={{ kafka_properties_logdir }}"
+
+- name: Configure Kafka (5/7)
+  lineinfile:
+    path: "{{ kafka_properties_ConfigFile }}"
+    state: present
+    regexp: '^#*metric.reporters=io.confluent.metrics.reporter.ConfluentMetricsReporter.*'
+    line: "metric.reporters=io.confluent.metrics.reporter.ConfluentMetricsReporter"
+
+- name: Configure Kafka (6/7)
+  lineinfile:
+    path: "{{ kafka_properties_ConfigFile }}"
+    state: present
+    regexp: '^#*confluent.metrics.reporter.bootstrap.servers=localhost:9092.*'
+    line: "confluent.metrics.reporter.bootstrap.servers=localhost:9092"
+
+- name: Configure Kafka (7/7)
+  lineinfile:
+    path: "{{ kafka_properties_ConfigFile }}"
+    state: present
+    regexp: '^#*confluent.metrics.reporter.topic.replicas=1.*'
+    line: "confluent.metrics.reporter.topic.replicas=1"
+...

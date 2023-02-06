@@ -1,0 +1,8 @@
+---
+- name: Configure Rest Proxy (1/1)
+  lineinfile:
+    path: "{{ rest_proxy_config_file }}"
+    state: present
+    regexp: '^#*zookeeper.connect=.*'
+    line: "zookeeper.connect={{ kafka_properties_zookeeperPrincipal  }}:2181"
+...

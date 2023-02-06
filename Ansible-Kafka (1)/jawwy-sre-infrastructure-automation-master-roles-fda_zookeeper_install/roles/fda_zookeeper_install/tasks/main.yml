@@ -1,0 +1,19 @@
+---
+- name: Configure Zookepeer (1/2)
+  blockinfile:
+    path: "{{ kafka_properties_zookeeperConfigFile }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: "{{ kafka_properties_zookeeperConfig }}"
+
+- name: Configure Zookepeer (2/2)
+  lineinfile:
+    path: "{{ kafka_properties_zookeeperConfigFile }}"
+    state: present
+    regexp: '^#*dataDir=.*'
+    line: "dataDir={{ kafka_properties_zookeeperDataDir }}"
+
+- name: Create myid file for Zookeeper
+  copy:
+    dest: "{{ kafka_properties_zookeeperDataDir }}/myid"
+    content: "{{ zk_my_id }}"
+...

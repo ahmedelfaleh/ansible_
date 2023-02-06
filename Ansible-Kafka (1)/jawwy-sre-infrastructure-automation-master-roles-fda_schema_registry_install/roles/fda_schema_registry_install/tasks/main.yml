@@ -1,0 +1,37 @@
+---
+- name: Configure Schema Registry (1/3)
+  lineinfile:
+    path: "{{ kafka_properties_schemaConfigFile }}"
+    state: present
+    regexp: '^#*listeners=.*'
+    line: "listeners=http://0.0.0.0:8081"
+
+- name: Configure Schema Registry (2/3)
+  lineinfile:
+    path: "{{ kafka_properties_schemaConfigFile }}"
+    state: present
+    regexp: '^#*host.name=.*'
+    line: "host.name={{ ansible_hostname }}"
+
+- name: Configure Schema Registry (3/3)
+  lineinfile:
+    path: "{{ kafka_properties_schemaConfigFile }}"
+    state: present
+    regexp: '^#*kafkastore.bootstrap.servers=.*'
+    line: "kafkastore.bootstrap.servers={{ kafka_bootstap_servers_plaintext  }}"
+
+- name: Configure KSQL (1/1)
+  lineinfile:
+    path: "{{ kafka_properties_KSQL_ConfigFile }}"
+    state: present
+    regexp: '^#*ksql.streams.state.dir=.*'
+    line: "ksql.streams.state.dir={{ kafka_properties_KSQL_Dir }}"
+
+- name: Create KSQL working directory
+  file:
+    path: "{{ kafka_properties_KSQL_Dir }}"
+    state: directory
+    mode: '0775'
+    owner: root
+    group: confluent
+...

@@ -1,0 +1,23 @@
+---
+- name: Install Confluent Repo RPM Public key
+  rpm_key:
+    state: present
+    key: https://packages.confluent.io/rpm/{{ repository_version }}/archive.key
+
+- name: Add repositories
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    file: "{{ item.file }}"
+    baseurl: "{{ item.baseurl }}"
+    gpgcheck: "{{ item.gpgcheck }}"
+    gpgkey:  "{{ item.gpgkey }}"
+    enabled: "{{ item.enabled }}"
+  with_items:
+    - "{{ repositories }}"
+
+- name: Install Confluent Platform
+  yum:
+    name: "confluent-platform-{{ version }}"
+    state: present
+...

@@ -1,0 +1,15 @@
+---
+- name: Configure Kafka Connect (1/2)
+  lineinfile:
+    path: "{{ connect_configuration_file }}"
+    state: present
+    regexp: '^#*consumer.interceptor.classes=.*'
+    line: "consumer.interceptor.classes=io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
+
+- name: Configure Kafka Connect (1/1)
+  lineinfile:
+    path: "{{ connect_configuration_file }}"
+    state: present
+    regexp: '^#*producer.interceptor.classes=.*'
+    line: "producer.interceptor.classes=io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
+...

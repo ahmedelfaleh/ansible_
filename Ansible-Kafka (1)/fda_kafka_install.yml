@@ -1,0 +1,36 @@
+---
+- name: Install Confluent kafka packages
+  hosts: fda-message-broker
+  roles:
+    - fda_confluent_kafka_install
+
+- name: Install Confluent Zookeeper
+  hosts: fda-zookeeper
+  roles:
+    - fda_zookeeper_install
+
+- name: Install Confluent Kafka brokers
+  hosts: fda-kafka-broker
+  roles:
+    - fda_kafka_broker_install
+
+- name: Install Confluent Kafka schema registry
+  hosts: fda-schema-registry
+  roles:
+    - fda_schema_registry_install
+
+- name: Install Confluent Control Center
+  hosts: fda-control-center
+  roles:
+    - fda_control_center_install
+
+- name: Install Confluent Kafka REST API Proxy
+  hosts: fda-rest-proxy
+  roles:
+    - fda_rest_proxy_install
+
+- name: Install Confluent Kafka Connect
+  hosts: fda-rest-proxy
+  roles:
+    - fda_connect_install
+...
